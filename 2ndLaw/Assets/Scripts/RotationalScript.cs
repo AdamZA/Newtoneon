@@ -8,7 +8,7 @@ public class RotationalScript : MonoBehaviour
     public Transform playerObject;
 
     //Class Variables
-    private float speed = 2.0f;
+    private float speed = 3.0f;
     private Vector2 _centre;
     private float _angle;
     private float _radius;
@@ -18,7 +18,7 @@ public class RotationalScript : MonoBehaviour
     {
         _angle = 0;
         _centre = playerObject.transform.position;
-        _radius = 0.7f;
+        _radius = 0.8f;
     }
 	
 	// Update is called once per frame
