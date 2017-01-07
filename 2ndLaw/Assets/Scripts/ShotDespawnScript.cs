@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class ShotDespawnScript : MonoBehaviour
 {
+
+	public float despawnTime = 3.0f;
 	void Start ()
     {
-        Destroy(this.gameObject, 3.0f);
+        Destroy(this.gameObject, despawnTime);
 	}
-	
+
 }
