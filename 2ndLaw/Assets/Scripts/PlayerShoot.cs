@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootScript : MonoBehaviour {
+public class PlayerShoot : MonoBehaviour {
 
     //variables/refs
 
@@ -18,7 +18,7 @@ public class ShootScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        shotSpeed = 5.0f;
+        shotSpeed = 8.0f;
         playerSpeed = 3.0f;
         baseCoolDown = 0.2f;
         remainingCooldown = baseCoolDown;
