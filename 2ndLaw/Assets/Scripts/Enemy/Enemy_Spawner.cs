@@ -8,12 +8,14 @@ public class Enemy_Spawner : MonoBehaviour
     public float spawnDelay;
     public float spawnRate;
     private int spawnCount;
+    private bool playerAlive;
     private GameObject[] _spawners;
     
 
 	// Use this for initialization
 	void Start ()
     {
+        playerAlive = true;
         _spawners = GameObject.FindGameObjectsWithTag("Spawner");
         spawnDelay = 2.0f;
         spawnRate = 5.0f;
@@ -22,24 +24,27 @@ public class Enemy_Spawner : MonoBehaviour
 	
 	public void SpawnEnemies()
     {
-        if(_spawners.Length > 0)
+        if(playerAlive)
         {
-            if (spawnCount % 10 == 0 && spawnRate > 2.0f)
+            if (_spawners.Length > 0)
             {
-                spawnRate -= 0.5f;
+                if (spawnCount % 10 == 0 && spawnRate > 2.0f)
+                {
+                    spawnRate -= 0.5f;
+                }
+
+                int spawnerToUse = Mathf.RoundToInt(Random.Range(0, _spawners.Length - 1));
+                float spawnerMaxX = _spawners[spawnerToUse].GetComponent<BoxCollider>().bounds.max.x;
+                float spawnerMinX = _spawners[spawnerToUse].GetComponent<BoxCollider>().bounds.min.x;
+                float spawnX = Random.Range(Mathf.Min(spawnerMaxX, spawnerMinX), Mathf.Max(spawnerMaxX, spawnerMinX));
+
+                float spawnerMaxY = _spawners[spawnerToUse].GetComponent<BoxCollider>().bounds.max.y;
+                float spawnerMinY = _spawners[spawnerToUse].GetComponent<BoxCollider>().bounds.min.y;
+                float spawnY = Random.Range(Mathf.Min(spawnerMaxY, spawnerMinY), Mathf.Max(spawnerMaxY, spawnerMinY));
+
+                Instantiate(basicEnemy, new Vector3(spawnX, spawnY, 1.0f), Quaternion.identity);
+                spawnCount++;
             }
-
-            int spawnerToUse = Mathf.RoundToInt(Random.Range(0, _spawners.Length - 1));
-            float spawnerPosX = _spawners[spawnerToUse].transform.position.x;
-            float spawnerLocalScaleX = _spawners[spawnerToUse].transform.localScale.x;
-            float spawnX = Random.Range(Mathf.Min(spawnerPosX, spawnerLocalScaleX), Mathf.Max(spawnerPosX, spawnerLocalScaleX));
-
-            float spawnerPosY = _spawners[spawnerToUse].transform.position.y;
-            float spawnerLocalScaleY = _spawners[spawnerToUse].transform.localScale.y;
-            float spawnY = Random.Range(Mathf.Min(spawnerPosY, spawnerLocalScaleY), Mathf.Max(spawnerPosY, spawnerLocalScaleY));
-
-            Instantiate(basicEnemy, new Vector3(spawnX, spawnY, 1.0f), Quaternion.identity);
-            spawnCount++;
         }
     }
 }
