@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ce11754e67bae9c4fad3b809875f23e6
+timeCreated: 1499505805
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Starship One
+  fontNames:
+  - Starship One
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

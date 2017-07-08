@@ -78,12 +78,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\CameraFollow.cs" />
-    <Compile Include="Assets\Scripts\PlayerLife.cs" />
-    <Compile Include="Assets\Scripts\PlayerRotation.cs" />
-    <Compile Include="Assets\Scripts\PlayerShoot.cs" />
-    <Compile Include="Assets\Scripts\RotationalScript.cs" />
-    <Compile Include="Assets\Scripts\ShotDespawnScript.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Enemy_Spawner.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Homing_Basic.cs" />
+    <Compile Include="Assets\Scripts\General\AutoFade.cs" />
+    <Compile Include="Assets\Scripts\Menu\MainMenuEvents.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerLife.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerProjectile.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerRotation.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerShoot.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
