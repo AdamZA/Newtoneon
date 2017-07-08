@@ -2,15 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Homing_Basic : MonoBehaviour {
+public class Homing_Basic : MonoBehaviour
+{
 
+    private GameObject _playerObject;
     private Transform _playerTransform;
+    private GameObject _gameStateManager;
     public float speed;
 	// Use this for initialization
 	void Start ()
     {
-        speed = 1.2f;
-        _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        _gameStateManager = GameObject.FindGameObjectWithTag("GameStateManager");
+        if(_gameStateManager != null)
+        {
+            speed = _gameStateManager.GetComponent<GameStateManager>().enemyStartSpeed;
+        }
+        _playerObject = GameObject.FindGameObjectWithTag("Player");
+        if(_playerObject != null)
+        {
+            _playerTransform = _playerObject.transform;
+        }
 	}
 	
 	// Update is called once per frame

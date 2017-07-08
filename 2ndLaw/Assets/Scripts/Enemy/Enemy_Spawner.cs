@@ -10,16 +10,17 @@ public class Enemy_Spawner : MonoBehaviour
     private int spawnCount;
     private bool playerAlive;
     private GameObject[] _spawners;
+    private int _totalSpawners;
     
 
 	// Use this for initialization
 	void Start ()
     {
+        _totalSpawners = 0;
         playerAlive = true;
         _spawners = GameObject.FindGameObjectsWithTag("Spawner");
-        spawnDelay = 2.0f;
-        spawnRate = 5.0f;
         InvokeRepeating("SpawnEnemies", spawnDelay, spawnRate);
+        _totalSpawners++;
     }
 	
 	public void SpawnEnemies()
@@ -28,12 +29,17 @@ public class Enemy_Spawner : MonoBehaviour
         {
             if (_spawners.Length > 0)
             {
-                if (spawnCount % 10 == 0 && spawnRate > 2.0f)
+                if (spawnCount % 5 == 0 && spawnRate > 0.5f)
                 {
                     spawnRate -= 0.5f;
                 }
-
-                int spawnerToUse = Mathf.RoundToInt(Random.Range(0, _spawners.Length - 1));
+                else if (spawnCount % 5 == 0 && _totalSpawners <= 8)
+                {
+                    InvokeRepeating("SpawnEnemies", 2, 5);
+                    _totalSpawners++;
+                }
+                
+                int spawnerToUse = Mathf.RoundToInt(Random.Range(0, _spawners.Length));
                 float spawnerMaxX = _spawners[spawnerToUse].GetComponent<BoxCollider>().bounds.max.x;
                 float spawnerMinX = _spawners[spawnerToUse].GetComponent<BoxCollider>().bounds.min.x;
                 float spawnX = Random.Range(Mathf.Min(spawnerMaxX, spawnerMinX), Mathf.Max(spawnerMaxX, spawnerMinX));

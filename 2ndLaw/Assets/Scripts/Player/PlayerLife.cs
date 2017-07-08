@@ -8,9 +8,7 @@ public class PlayerLife : MonoBehaviour
     {
         if (collisionInfo.gameObject.CompareTag ("Death"))
         {
-            //send out an alert
-            //temp test: destroy gameobject
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }

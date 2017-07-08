@@ -10,48 +10,60 @@ public class PlayerShoot : MonoBehaviour {
     public Transform playerObject;
     public Transform orbObject;
     private float shotSpeed;
-    private float playerSpeed;
-    private float remainingCooldown;
-    private float baseCoolDown;
-    private bool onCooldown;
+    private float _playerSpeed;
+    private float _remainingCooldown;
+    private float _baseCoolDown;
+    private bool _onCooldown;
+    private Rect _touchableScreen;
 
     // Use this for initialization
     void Start ()
     {
         shotSpeed = 8.0f;
-        playerSpeed = 5.0f;
-        baseCoolDown = 0.2f;
-        remainingCooldown = baseCoolDown;
-        onCooldown = false;
+        _playerSpeed = 5.0f;
+        _baseCoolDown = 0.2f;
+        _remainingCooldown = _baseCoolDown;
+        _onCooldown = false;
+        _touchableScreen = new Rect(0, 0, Screen.width, Screen.height - 300);
 
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-        if(onCooldown)
+        if (_onCooldown)
         {
-            remainingCooldown -= Time.deltaTime;
-            if(remainingCooldown <= 0)
+            _remainingCooldown -= Time.deltaTime;
+            if (_remainingCooldown <= 0)
             {
-                onCooldown = false;
-                remainingCooldown = baseCoolDown;
+                _onCooldown = false;
+                _remainingCooldown = _baseCoolDown;
             }
         }
 
-		//PC controls
-        if(Input.GetKeyDown("space"))
+        //PC controls
+        if (Input.GetKeyDown("space"))
         {
             Fire();
         }
 
         //Touch Controls
-	}
+        for (int i = 0; i < Input.touchCount; i++)
+        {
+            TouchPhase phase = Input.GetTouch(i).phase;
+            var touchPos = Input.GetTouch(i).position;
+
+            if (_touchableScreen.Contains(touchPos) && phase == TouchPhase.Began)
+            {
+                Fire();
+            }
+        }
+    }
 
     //Method for shot
     void Fire()
     {
-        if(!onCooldown)
+        if(!_onCooldown)
         {
             //Calculate the angle
             var orbPos = orbObject.position;
@@ -64,7 +76,7 @@ public class PlayerShoot : MonoBehaviour {
             shot.GetComponent<Rigidbody2D>().velocity = targetDir * -shotSpeed;
 
             Recoil();
-            onCooldown = true;
+            _onCooldown = true;
         }
         
     }
@@ -77,7 +89,7 @@ public class PlayerShoot : MonoBehaviour {
         var orbPos = orbObject.position;
         var playerPos = playerObject.position;
         Vector3 targetDir = playerPos - orbPos;
-        playerObject.GetComponent<Rigidbody2D>().velocity = targetDir * playerSpeed;
+        playerObject.GetComponent<Rigidbody2D>().velocity = targetDir * _playerSpeed;
     }
 
 }
