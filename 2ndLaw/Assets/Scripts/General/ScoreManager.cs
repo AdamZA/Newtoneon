@@ -32,7 +32,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public void playerDead()
+    public void GameOver()
     {
         if (_score > _highScore)
         {

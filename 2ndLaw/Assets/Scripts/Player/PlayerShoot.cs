@@ -24,7 +24,7 @@ public class PlayerShoot : MonoBehaviour {
         _baseCoolDown = 0.2f;
         _remainingCooldown = _baseCoolDown;
         _onCooldown = false;
-        _touchableScreen = new Rect(0, 0, Screen.width, Screen.height - 300);
+        _touchableScreen = new Rect(0, 0, Screen.width, Screen.height - 400);
 
     }
 

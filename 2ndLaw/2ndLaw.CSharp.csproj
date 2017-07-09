@@ -79,16 +79,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
-    <Compile Include="Assets\Scripts\Enemy\Enemy_Death.cs" />
-    <Compile Include="Assets\Scripts\Enemy\Enemy_Spawner.cs" />
-    <Compile Include="Assets\Scripts\Enemy\Homing_Basic.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyDeath.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemySpawner.cs" />
+    <Compile Include="Assets\Scripts\Enemy\HomingBasic.cs" />
     <Compile Include="Assets\Scripts\General\AutoFade.cs" />
     <Compile Include="Assets\Scripts\General\GameStateManager.cs" />
     <Compile Include="Assets\Scripts\General\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\Menu\InGameMenu.cs" />
     <Compile Include="Assets\Scripts\Menu\MainMenuEvents.cs" />
+    <Compile Include="Assets\Scripts\Player\CleanUpObject.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerLife.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerProjectile.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerRotation.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerShoot.cs" />
   </ItemGroup>

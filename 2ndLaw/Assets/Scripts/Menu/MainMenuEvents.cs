@@ -6,6 +6,10 @@ public class MainMenuEvents : MonoBehaviour
 {
     private int _muteSounds;
     private int _muteMusic;
+    private int _highScore;
+
+    public GameObject mainMenuText;
+
     public void Start()
     {
         _muteSounds = PlayerPrefs.GetInt("sounds");
@@ -30,6 +34,10 @@ public class MainMenuEvents : MonoBehaviour
         {
             _muteSounds = 0;
         }
+
+        _highScore = PlayerPrefs.GetInt("HighScore", 0);
+        mainMenuText.GetComponent<UnityEngine.UI.Text>().text = "Highscore: " + _highScore;
+
     }   
 
     public void PlayButtonPressed()
