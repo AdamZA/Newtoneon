@@ -2,39 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuEvents : MonoBehaviour
 {
-    private int _muteSounds;
-    private int _muteMusic;
+    private int _musicMuted;
+    private int _soundMuted;
     private int _highScore;
 
     public GameObject mainMenuText;
     public GameObject playerButton;
+    public Button soundButton;
+    public Button musicButton;
+
+    public Sprite musicUnmutedIcon;
+    public Sprite musicMutedIcon;
+    public Sprite soundMutedIcon;
+    public Sprite soundUnmutedIcon;
+
+    public AudioSource Music;
 
     public void Start()
     {
-        _muteSounds = PlayerPrefs.GetInt("sounds");
-        _muteMusic = PlayerPrefs.GetInt("music");
+        _musicMuted = PlayerPrefs.GetInt("music", 0);
+        _soundMuted = PlayerPrefs.GetInt("sounds", 0);
 
-        if (_muteMusic == 1)
+        if (_musicMuted == 0)
         {
-            //music.mute = true;
-           // musicButton.image.sprite = musicIconOFF;
+            musicButton.image.sprite = musicUnmutedIcon;
+            Music.mute = false;
         }
         else
         {
-            _muteMusic = 0;
-            //music.Play();
+            musicButton.image.sprite = musicMutedIcon;
+            Music.mute = true; 
         }
-        if (_muteSounds == 1)
+
+        if (_soundMuted == 0)
         {
-            //music.mute = true;
-            //soundButton.image.sprite = soundIconOFF;
+            soundButton.image.sprite = soundUnmutedIcon;
         }
         else
         {
-            _muteSounds = 0;
+            soundButton.image.sprite = soundMutedIcon;
         }
 
         _highScore = PlayerPrefs.GetInt("HighScore", 0);
@@ -54,29 +64,37 @@ public class MainMenuEvents : MonoBehaviour
         AutoFade.LoadScene("Game_Main",0.4f, 0.1f, Color.black);
     }
 
-    public void MuteSoundButtonPressed()
+    public void MuteMusicPressed()
     {
-        ButtonPressEffect();
-        if (PlayerPrefs.GetInt("Sounds") == 1)
+        if (_musicMuted == 0)
         {
-            PlayerPrefs.SetInt("Sounds", 0);
+            PlayerPrefs.SetInt("music", 1);
+            _musicMuted = 1;
+            Music.mute = true;
+            musicButton.image.sprite = musicMutedIcon;
         }
         else
         {
-            PlayerPrefs.SetInt("Sounds", 1);
+            Music.mute = false;
+            _musicMuted = 0;
+            PlayerPrefs.SetInt("music", 0);
+            musicButton.image.sprite = musicUnmutedIcon;
         }
     }
 
-    public void MuteMusicButtonPressed()
+    public void MuteSoundPressed()
     {
-        ButtonPressEffect();
-        if (PlayerPrefs.GetInt("Music") == 1)
+        if (_soundMuted == 0)
         {
-            PlayerPrefs.SetInt("Music", 0);
+            _soundMuted = 1;
+            PlayerPrefs.SetInt("sounds", 1);
+            soundButton.image.sprite = soundMutedIcon;
         }
         else
         {
-            PlayerPrefs.SetInt("Music", 1);
+            _soundMuted = 0;
+            PlayerPrefs.SetInt("sounds", 0);
+            soundButton.image.sprite = soundUnmutedIcon;
         }
     }
 
@@ -95,9 +113,7 @@ public class MainMenuEvents : MonoBehaviour
 
     public void ButtonPressEffect()
     {
-        if (_muteSounds == 0)
-        {
-        }
+        
             
     }
 	

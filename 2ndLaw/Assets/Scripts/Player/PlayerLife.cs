@@ -6,6 +6,7 @@ public class PlayerLife : MonoBehaviour
 {
     public ParticleSystem deathAnimation;
     private GameStateManager _gameStateManager;
+    public AudioClip deathSound;
 
     public void Start()
     {
@@ -20,6 +21,12 @@ public class PlayerLife : MonoBehaviour
             {
                 _gameStateManager.GameOver();
             }
+
+            if (_gameStateManager.soundMuted == 0)
+            {
+                AudioSource.PlayClipAtPoint(deathSound, gameObject.transform.position);
+            }
+
             Instantiate(deathAnimation, transform.position, gameObject.transform.rotation);
             Destroy(gameObject);
         }

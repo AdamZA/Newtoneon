@@ -8,9 +8,14 @@ public class GameStateManager : MonoBehaviour
     private InGameMenu _inGameMenu;
     private EnemySpawner _enemySpawner;
     private ScoreManager _scoreManager;
+    public int soundMuted;
+    public int musicMuted;
 
     void Start ()
     {
+        soundMuted = PlayerPrefs.GetInt("sounds", 0);
+        musicMuted = PlayerPrefs.GetInt("music", 0);
+
         GameObject _eventManager = GameObject.FindGameObjectWithTag("EventSystem");
         if(_eventManager != null)
         {

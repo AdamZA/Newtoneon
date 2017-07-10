@@ -16,6 +16,7 @@ public class PlayerShoot : MonoBehaviour {
     private float _baseCoolDown;
     private bool _onCooldown;
     private Rect _touchableScreen;
+    private GameStateManager _manager;
 
     // Use this for initialization
     void Start ()
@@ -26,7 +27,7 @@ public class PlayerShoot : MonoBehaviour {
         _remainingCooldown = _baseCoolDown;
         _onCooldown = false;
         _touchableScreen = new Rect(0, 0, Screen.width, Screen.height - 400);
-
+        _manager = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<GameStateManager>();
     }
 
     // Update is called once per frame
@@ -70,11 +71,12 @@ public class PlayerShoot : MonoBehaviour {
             var orbPos = orbObject.position;
             var playerPos = playerObject.position;
             Vector3 targetDir = playerPos - orbPos;
-            float angle = Vector3.Angle(targetDir, playerObject.forward);
-
-            //Instantiate the shot
             var shot = Instantiate(shotPrefab, orbPos, Quaternion.identity);
-            AudioSource.PlayClipAtPoint(shotSound, gameObject.transform.position);
+            //TODO: Fix sound management
+            if(_manager.soundMuted == 0)
+            {
+                AudioSource.PlayClipAtPoint(shotSound, gameObject.transform.position);
+            }
             shot.GetComponent<Rigidbody2D>().velocity = targetDir * -shotSpeed;
 
             Recoil();
