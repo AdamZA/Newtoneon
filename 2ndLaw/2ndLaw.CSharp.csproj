@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\General\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\Menu\InGameMenu.cs" />
     <Compile Include="Assets\Scripts\Menu\MainMenuEvents.cs" />
+    <Compile Include="Assets\Scripts\Music\MusicManager.cs" />
     <Compile Include="Assets\Scripts\Player\CleanUpObject.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerLife.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerRotation.cs" />
