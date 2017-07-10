@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuEvents : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class MainMenuEvents : MonoBehaviour
     private int _highScore;
 
     public GameObject mainMenuText;
+    public GameObject playerButton;
 
     public void Start()
     {
@@ -43,7 +45,13 @@ public class MainMenuEvents : MonoBehaviour
     public void PlayButtonPressed()
     {
         ButtonPressEffect();
-        AutoFade.LoadScene("Game_Main",1,1, Color.black);
+        playerButton.GetComponent<Animator>().SetTrigger("PlayPressed");
+        Invoke("PlayButtonPressedSceneChange", 1);
+    }
+
+    public void PlayButtonPressedSceneChange()
+    {
+        AutoFade.LoadScene("Game_Main",0.4f, 0.1f, Color.black);
     }
 
     public void MuteSoundButtonPressed()

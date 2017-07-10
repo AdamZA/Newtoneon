@@ -9,6 +9,7 @@ public class PlayerShoot : MonoBehaviour {
     public Transform shotPrefab;
     public Transform playerObject;
     public Transform orbObject;
+    public AudioClip shotSound;
     private float shotSpeed;
     private float _playerSpeed;
     private float _remainingCooldown;
@@ -73,6 +74,7 @@ public class PlayerShoot : MonoBehaviour {
 
             //Instantiate the shot
             var shot = Instantiate(shotPrefab, orbPos, Quaternion.identity);
+            AudioSource.PlayClipAtPoint(shotSound, gameObject.transform.position);
             shot.GetComponent<Rigidbody2D>().velocity = targetDir * -shotSpeed;
 
             Recoil();

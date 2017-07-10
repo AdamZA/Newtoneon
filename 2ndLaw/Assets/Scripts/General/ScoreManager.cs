@@ -19,7 +19,7 @@ public class ScoreManager : MonoBehaviour
     public void incrementScore(int increaseAmount)
     {
         _score += increaseAmount;
-        scoreText.GetComponent<UnityEngine.UI.Text>().text = "Score: " + _score;
+        scoreText.GetComponent<UnityEngine.UI.Text>().text = "SCORE: " + _score;
 
         if(_score % 500 == 0 && _gameStateManager != null)
         {
