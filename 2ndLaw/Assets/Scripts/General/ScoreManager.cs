@@ -21,12 +21,12 @@ public class ScoreManager : MonoBehaviour
         _score += increaseAmount;
         scoreText.GetComponent<UnityEngine.UI.Text>().text = "SCORE: " + _score;
 
-        if(_score % 500 == 0 && _gameStateManager != null)
+        if(_score % 400 == 0 && _gameStateManager != null)
         {
             GameStateManager manager = _gameStateManager.GetComponent<GameStateManager>();
-            if(manager != null && manager.enemyStartSpeed < 4.0f)
+            if(manager != null && manager.enemyStartSpeed < 3.0f)
             {
-                _gameStateManager.GetComponent<GameStateManager>().enemyStartSpeed += 0.4f;
+                _gameStateManager.GetComponent<GameStateManager>().enemyStartSpeed += 0.5f;
             }
             
         }

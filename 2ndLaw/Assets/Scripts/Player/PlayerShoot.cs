@@ -17,10 +17,12 @@ public class PlayerShoot : MonoBehaviour {
     private bool _onCooldown;
     private Rect _touchableScreen;
     private GameStateManager _manager;
+    private bool _gunSafety;
 
     // Use this for initialization
     void Start ()
     {
+        _gunSafety = true;
         shotSpeed = 8.0f;
         _playerSpeed = 5.0f;
         _baseCoolDown = 0.2f;
@@ -28,6 +30,7 @@ public class PlayerShoot : MonoBehaviour {
         _onCooldown = false;
         _touchableScreen = new Rect(0, 0, Screen.width, Screen.height - 200);
         _manager = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<GameStateManager>();
+        Invoke("RemoveSafety", 1.0f);
     }
 
     // Update is called once per frame
@@ -65,7 +68,7 @@ public class PlayerShoot : MonoBehaviour {
     //Method for shot
     void Fire()
     {
-        if(!_onCooldown && Time.timeScale != 0)
+        if(!_onCooldown && Time.timeScale != 0 && !_gunSafety)
         {
             //Calculate the angle
             var orbPos = orbObject.position;
@@ -85,6 +88,10 @@ public class PlayerShoot : MonoBehaviour {
         
     }
 
+    void RemoveSafety()
+    {
+        _gunSafety = false;
+    }
 
     //Method for resultant movement
     void Recoil()
