@@ -26,7 +26,7 @@ public class PlayerShoot : MonoBehaviour {
         _baseCoolDown = 0.2f;
         _remainingCooldown = _baseCoolDown;
         _onCooldown = false;
-        _touchableScreen = new Rect(0, 0, Screen.width, Screen.height - 400);
+        _touchableScreen = new Rect(0, 0, Screen.width, Screen.height - 200);
         _manager = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<GameStateManager>();
     }
 
@@ -65,7 +65,7 @@ public class PlayerShoot : MonoBehaviour {
     //Method for shot
     void Fire()
     {
-        if(!_onCooldown)
+        if(!_onCooldown && Time.timeScale != 0)
         {
             //Calculate the angle
             var orbPos = orbObject.position;

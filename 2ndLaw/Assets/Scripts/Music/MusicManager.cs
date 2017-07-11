@@ -2,33 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicManager : MonoBehaviour {
+[RequireComponent(typeof(AudioSource))]
+public class MusicManager : MonoBehaviour
+{
+    public AudioClip musicPreloop;
+    public AudioClip musicLoop;
+    private AudioSource _musicPlayer;
 
-    public AudioClip initialMusic;
-    public AudioClip loopMusic;
-    private AudioSource _source;
-    private float _delay;
-
-	// Use this for initialization
-	void Start ()
+    void Start()
     {
-        _source = GetComponent<AudioSource>();
-        _delay = initialMusic.length;
-        playMusic();
+        _musicPlayer = GetComponent<AudioSource>();
+        _musicPlayer.loop = false;
+        StartCoroutine(playInitial());
     }
 
-    public void playMusic()
+    IEnumerator playInitial()
     {
-        _source.clip = initialMusic;
-        _source.Play();
-        Invoke("transitionMusic", _delay);
+        Debug.Log("playing initial");
+        _musicPlayer.clip = musicPreloop;
+        _musicPlayer.Play();
+        yield return new WaitForSeconds(_musicPlayer.clip.length);
+
+        StartCoroutine(playLoop());
     }
 
-    private void transitionMusic()
+    IEnumerator playLoop()
     {
-        _source.Stop();
-        _source.clip = loopMusic;
-        _source.loop = true;
-        _source.Play();
+        Debug.Log("playing loop");
+        _musicPlayer.clip = musicLoop;
+        _musicPlayer.loop = true;
+        _musicPlayer.Play();
+        yield return new WaitForSeconds(_musicPlayer.clip.length);
+        StartCoroutine(playLoop());
     }
 }
+
+

@@ -106,8 +106,8 @@ public class InGameMenu : MonoBehaviour {
     {
         if(_musicMuted == 0)
         {
-            PlayerPrefs.SetInt("music", 1);
             _musicMuted = 1;
+            PlayerPrefs.SetInt("music", 1);
             gameStateManager.musicMuted = 1;
             musicButton.image.sprite = musicMutedIcon;
             Music.mute = true;
