@@ -30,7 +30,7 @@ public class PlayerShoot : MonoBehaviour {
         _onCooldown = false;
         _touchableScreen = new Rect(0, 0, Screen.width, Screen.height - 200);
         _manager = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<GameStateManager>();
-        Invoke("RemoveSafety", 1.0f);
+        Invoke("RemoveSafety", 0.5f);
     }
 
     // Update is called once per frame

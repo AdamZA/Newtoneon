@@ -26,7 +26,6 @@ public class EnemySpawner : MonoBehaviour
 	
 	public void SpawnEnemies()
     {
-        Debug.Log("calling");
         if(playerAlive)
         {
             if (_spawners.Length > 0)

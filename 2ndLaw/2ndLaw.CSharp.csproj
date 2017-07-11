@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\Enemy\EnemySpawner.cs" />
     <Compile Include="Assets\Scripts\Enemy\HomingBasic.cs" />
     <Compile Include="Assets\Scripts\General\AutoFade.cs" />
+    <Compile Include="Assets\Scripts\General\EscapeScript.cs" />
     <Compile Include="Assets\Scripts\General\GameStateManager.cs" />
     <Compile Include="Assets\Scripts\General\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\Menu\InGameMenu.cs" />

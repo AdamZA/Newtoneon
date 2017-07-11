@@ -24,6 +24,12 @@ public class MainMenuEvents : MonoBehaviour
 
     public void Start()
     {
+        var ingameMusic = GameObject.FindGameObjectWithTag("Music");
+        if(ingameMusic != null)
+        {
+            Destroy(ingameMusic);
+        }
+
         _musicMuted = PlayerPrefs.GetInt("music", 0);
         _soundMuted = PlayerPrefs.GetInt("sounds", 0);
 
@@ -61,7 +67,7 @@ public class MainMenuEvents : MonoBehaviour
 
     public void PlayButtonPressedSceneChange()
     {
-        AutoFade.LoadScene("Game_Main",0.4f, 0.1f, Color.black);
+        AutoFade.LoadScene("Game_Injector", 0.4f, 0.0f, Color.black);
     }
 
     public void MuteMusicPressed()

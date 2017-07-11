@@ -28,7 +28,7 @@ public class InGameMenu : MonoBehaviour {
     public Sprite soundMutedIcon;
     public Sprite soundUnmutedIcon;
 
-    public AudioSource Music;
+    private AudioSource _music;
 
     public GameStateManager gameStateManager;
 
@@ -38,16 +38,17 @@ public class InGameMenu : MonoBehaviour {
         _player = GameObject.FindGameObjectWithTag("Player");
         _musicMuted = PlayerPrefs.GetInt("music", 0);
         _soundMuted = PlayerPrefs.GetInt("sounds", 0);
+        _music = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>();
 
         if (_musicMuted == 0)
         {
             musicButton.image.sprite = musicUnmutedIcon;
-            Music.mute = false;
+            _music.mute = false;
         }
         else
         {
             musicButton.image.sprite = musicMutedIcon;
-            Music.mute = true;
+            _music.mute = true;
         }
 
         if (_soundMuted == 0)
@@ -62,13 +63,13 @@ public class InGameMenu : MonoBehaviour {
 
     public void RestartGame()
     {
-        AutoFade.LoadScene("Game_Main", 0.5f, 0.1f, Color.black);
+        AutoFade.LoadScene("Game_Main", 0.2f, 0.1f, Color.black);
         Time.timeScale = 1;
     }
 
     public void BackButton()
     {
-        AutoFade.LoadScene("Game_Menu", 0.5f, 0.5f, Color.black);
+        AutoFade.LoadScene("Game_Menu", 0.2f, 0.1f, Color.black);
         Time.timeScale = 1;
     }
 
@@ -110,7 +111,7 @@ public class InGameMenu : MonoBehaviour {
             PlayerPrefs.SetInt("music", 1);
             gameStateManager.musicMuted = 1;
             musicButton.image.sprite = musicMutedIcon;
-            Music.mute = true;
+            _music.mute = true;
         }
         else
         {
@@ -118,7 +119,7 @@ public class InGameMenu : MonoBehaviour {
             PlayerPrefs.SetInt("music", 0);
             gameStateManager.musicMuted = 0;
             musicButton.image.sprite = musicUnmutedIcon;
-            Music.mute = false;
+            _music.mute = false;
         }
     }
 

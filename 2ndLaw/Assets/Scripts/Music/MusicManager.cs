@@ -7,34 +7,29 @@ public class MusicManager : MonoBehaviour
 {
     public AudioClip musicPreloop;
     public AudioClip musicLoop;
-    private AudioSource _musicPlayer;
-
+    private AudioSource _source;
+    private bool _secondStarted;
+    void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+    }
     void Start()
     {
-        _musicPlayer = GetComponent<AudioSource>();
-        _musicPlayer.loop = false;
-        StartCoroutine(playInitial());
+        _source = GetComponent<AudioSource>();
+        _source.loop = false;
+        _source.clip = musicPreloop;
+        _source.Play();
     }
 
-    IEnumerator playInitial()
+    public void Update()
     {
-        Debug.Log("playing initial");
-        _musicPlayer.clip = musicPreloop;
-        _musicPlayer.Play();
-        yield return new WaitForSeconds(_musicPlayer.clip.length);
-
-        StartCoroutine(playLoop());
-    }
-
-    IEnumerator playLoop()
-    {
-        Debug.Log("playing loop");
-        _musicPlayer.clip = musicLoop;
-        _musicPlayer.loop = true;
-        _musicPlayer.Play();
-        yield return new WaitForSeconds(_musicPlayer.clip.length);
-        StartCoroutine(playLoop());
+        if(!_secondStarted && !_source.isPlaying)
+        {
+            _secondStarted = true;
+            _source.loop = true;
+            _source.clip = musicLoop;
+            _source.Play();
+        }
     }
 }
-
 
