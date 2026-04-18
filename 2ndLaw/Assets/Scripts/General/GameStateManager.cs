@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameStateManager : MonoBehaviour
 {
+    public static event Action OnGameOver;
+
     public float enemyStartSpeed;
     private InGameMenu _inGameMenu;
     private EnemySpawner _enemySpawner;
@@ -16,30 +19,24 @@ public class GameStateManager : MonoBehaviour
     {
         Application.targetFrameRate = 60;
 
-        GameObject _eventManager = GameObject.FindGameObjectWithTag("EventSystem");
-        if(_eventManager != null)
-        {
-            _inGameMenu = _eventManager.GetComponent<InGameMenu>();
-        }
+        GameObject eventManager = GameObject.FindGameObjectWithTag("EventSystem");
+        if (eventManager != null)
+            _inGameMenu = eventManager.GetComponent<InGameMenu>();
 
-        GameObject _enemySpawnerObject = GameObject.FindGameObjectWithTag("SpawnerContainer");
-        if (_enemySpawnerObject != null)
-        {
-            _enemySpawner = _enemySpawnerObject.GetComponent<EnemySpawner>();
-        }
+        GameObject spawnerObject = GameObject.FindGameObjectWithTag("SpawnerContainer");
+        if (spawnerObject != null)
+            _enemySpawner = spawnerObject.GetComponent<EnemySpawner>();
 
-        GameObject _scoreManagerObject = GameObject.FindGameObjectWithTag("ScoreManager");
-        if(_scoreManagerObject != null)
-        {
-            _scoreManager = _scoreManagerObject.GetComponent<ScoreManager>();
-        }
+        GameObject scoreManagerObject = GameObject.FindGameObjectWithTag("ScoreManager");
+        if (scoreManagerObject != null)
+            _scoreManager = scoreManagerObject.GetComponent<ScoreManager>();
     }
-	
+
     public void GameOver()
     {
         if (_inGameMenu != null) _inGameMenu.GameOver();
         if (_enemySpawner != null) _enemySpawner.playerAlive = false;
         if (_scoreManager != null) _scoreManager.GameOver();
+        OnGameOver?.Invoke();
     }
-	
 }
