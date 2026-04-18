@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject basicEnemy;
     [SerializeField] private float spawnDelay;
     [SerializeField] private float spawnRate;
+    [SerializeField] private GameConfig config;
     private int enemiesSpawned;
     public bool playerAlive;
     private GameObject[] _spawners;
@@ -30,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
         {
             if (_spawners.Length > 0)
             {
-                if (enemiesSpawned != 0 && enemiesSpawned % 20 == 0 && _enemiesToSpawn < 15)
+                if (enemiesSpawned != 0 && enemiesSpawned % config.killsPerExtraEnemy == 0 && _enemiesToSpawn < config.maxEnemiesPerWave)
                 {
                     _enemiesToSpawn++;
                 }

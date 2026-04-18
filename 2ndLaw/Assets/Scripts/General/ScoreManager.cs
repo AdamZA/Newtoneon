@@ -5,6 +5,7 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private GameObject scoreText;
+    [SerializeField] private GameConfig config;
     private int _score;
     private int _highScore;
     private bool _gameOver;
@@ -20,17 +21,17 @@ public class ScoreManager : MonoBehaviour
 
     public void incrementScore(int increaseAmount)
     {
-        if(!_gameOver)
+        if (!_gameOver)
         {
             _score += increaseAmount;
             scoreText.GetComponent<UnityEngine.UI.Text>().text = "SCORE: " + _score;
 
-            if (_score % 400 == 0 && _gameStateManager != null)
+            if (_score % config.scorePerSpeedStep == 0 && _gameStateManager != null)
             {
                 GameStateManager manager = _gameStateManager.GetComponent<GameStateManager>();
-                if (manager != null && manager.enemyStartSpeed < 3.0f)
+                if (manager != null && manager.enemyStartSpeed < config.enemySpeedCap)
                 {
-                    manager.enemyStartSpeed += 0.25f;
+                    manager.enemyStartSpeed += config.enemySpeedIncrement;
                 }
             }
         }

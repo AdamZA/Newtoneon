@@ -6,6 +6,7 @@ public class EnemyDeath : MonoBehaviour
 {
     [SerializeField] private ParticleSystem deathAnimation;
     [SerializeField] private AudioClip deathSound;
+    [SerializeField] private GameConfig config;
     private GameObject _scoreManager;
     private GameStateManager _gameStateManager;
 
@@ -27,7 +28,7 @@ public class EnemyDeath : MonoBehaviour
 
             if (_scoreManager != null)
             {
-                _scoreManager.GetComponent<ScoreManager>().incrementScore(50);
+                _scoreManager.GetComponent<ScoreManager>().incrementScore(config != null ? config.killScore : 50);
                 Instantiate(deathAnimation, transform.position, gameObject.transform.rotation);
                 Destroy(this.gameObject);
             }

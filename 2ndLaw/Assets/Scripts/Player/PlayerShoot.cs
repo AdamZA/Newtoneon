@@ -7,29 +7,23 @@ public class PlayerShoot : MonoBehaviour {
     [SerializeField] private Transform shotPrefab;
     [SerializeField] private Transform orbObject;
     [SerializeField] private AudioClip shotSound;
+    [SerializeField] private GameConfig config;
     public Transform playerObject;
-    private float shotSpeed;
-    private float _playerSpeed;
     private float _remainingCooldown;
-    private float _baseCoolDown;
     private bool _onCooldown;
     private Rect _touchableScreen;
     private GameStateManager _manager;
     private bool _gunSafety;
 
-    // Use this for initialization
-    void Start ()
+    void Start()
     {
         _gunSafety = true;
-        shotSpeed = 8.0f;
-        _playerSpeed = 3.0f;
-        _baseCoolDown = 0.3f;
-        _remainingCooldown = _baseCoolDown;
+        _remainingCooldown = config.shotCooldown;
         _onCooldown = false;
         _touchableScreen = new Rect(0, 0, Screen.width, Screen.height - 200);
         GameObject gsm = GameObject.FindGameObjectWithTag("GameStateManager");
         if (gsm != null) _manager = gsm.GetComponent<GameStateManager>();
-        Invoke("RemoveSafety", 0.5f);
+        Invoke("RemoveSafety", config.gunSafetyDelay);
     }
 
     // Update is called once per frame
@@ -41,7 +35,7 @@ public class PlayerShoot : MonoBehaviour {
             if (_remainingCooldown <= 0)
             {
                 _onCooldown = false;
-                _remainingCooldown = _baseCoolDown;
+                _remainingCooldown = config.shotCooldown;
             }
         }
 
@@ -79,7 +73,7 @@ public class PlayerShoot : MonoBehaviour {
             {
                 AudioSource.PlayClipAtPoint(shotSound, gameObject.transform.position);
             }
-            shot.GetComponent<Rigidbody2D>().velocity = targetDir * -shotSpeed;
+            shot.GetComponent<Rigidbody2D>().velocity = targetDir * -config.shotSpeed;
 
             Recoil();
             _onCooldown = true;
@@ -97,7 +91,7 @@ public class PlayerShoot : MonoBehaviour {
         var orbPos = orbObject.position;
         var playerPos = playerObject.position;
         Vector3 targetDir = playerPos - orbPos;
-        playerObject.GetComponent<Rigidbody2D>().velocity = targetDir * _playerSpeed;
+        playerObject.GetComponent<Rigidbody2D>().velocity = targetDir * config.playerRecoilSpeed;
     }
 
 }
