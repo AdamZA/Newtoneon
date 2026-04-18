@@ -5,19 +5,21 @@ using UnityEngine;
 public class PlayerRotation : MonoBehaviour
 {
     public bool isPaused;
-	public float rotationSpeed;
+    public float rotationSpeed;
+
+    private Rigidbody2D _rb;
 
     public void Start()
     {
         isPaused = false;
+        _rb = GetComponent<Rigidbody2D>();
     }
 
-	// Update is called once per frame
-	void Update ()
+    void Update()
     {
-        if(!isPaused)
+        if (!isPaused)
         {
-            GetComponent<Rigidbody2D>().transform.Rotate(Vector3.forward, -1 * rotationSpeed);
+            _rb.transform.Rotate(Vector3.forward, -1 * rotationSpeed);
         }
-	}
+    }
 }

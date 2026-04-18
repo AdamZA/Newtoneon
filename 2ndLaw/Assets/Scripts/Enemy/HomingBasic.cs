@@ -5,35 +5,34 @@ using UnityEngine;
 public class HomingBasic : MonoBehaviour
 {
 
-    private GameObject _playerObject;
     private Transform _playerTransform;
-    private GameObject _gameStateManager;
     public float speed;
-	// Use this for initialization
-	void Start ()
+
+    private Rigidbody2D _rb;
+
+    void Start()
     {
-        _gameStateManager = GameObject.FindGameObjectWithTag("GameStateManager");
-        if(_gameStateManager != null)
+        _rb = GetComponent<Rigidbody2D>();
+
+        GameObject gsm = GameObject.FindGameObjectWithTag("GameStateManager");
+        if (gsm != null)
         {
-            speed = _gameStateManager.GetComponent<GameStateManager>().enemyStartSpeed;
+            GameStateManager manager = gsm.GetComponent<GameStateManager>();
+            if (manager != null) speed = manager.enemyStartSpeed;
         }
-        _playerObject = GameObject.FindGameObjectWithTag("Player");
-        if(_playerObject != null)
-        {
-            _playerTransform = _playerObject.transform;
-        }
-	}
-	
-	// Update is called once per frame
-	void Update ()
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null) _playerTransform = player.transform;
+    }
+
+    void Update()
     {
-        if(_playerTransform != null)
+        if (_playerTransform != null)
         {
             RotateTowardsPlayer();
         }
 
-        gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * speed;
-		
+        _rb.velocity = transform.right * speed;
     }
 
     void RotateTowardsPlayer()
