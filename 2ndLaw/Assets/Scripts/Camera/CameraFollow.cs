@@ -3,12 +3,11 @@
 public class CameraFollow : MonoBehaviour
 {
 
-	public float interpVelocity;
-	public float minDistance;
-	public float followDistance;
-	public GameObject target;
-	public Vector3 offset;
-	Vector3 targetPos;
+    [SerializeField] private float followDistance;
+    [SerializeField] private GameObject target;
+    [SerializeField] private Vector3 offset;
+    private float interpVelocity;
+    private Vector3 targetPos;
 	// Use this for initialization
 	void Start()
 	{

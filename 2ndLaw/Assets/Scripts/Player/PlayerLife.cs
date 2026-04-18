@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerLife : MonoBehaviour
 {
-    public ParticleSystem deathAnimation;
+    [SerializeField] private ParticleSystem deathAnimation;
+    [SerializeField] private AudioClip deathSound;
     private GameStateManager _gameStateManager;
-    public AudioClip deathSound;
 
     public void Start()
     {

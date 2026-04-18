@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerRotation : MonoBehaviour
 {
     public bool isPaused;
-    public float rotationSpeed;
+    [SerializeField] private float rotationSpeed;
 
     private Rigidbody2D _rb;
 

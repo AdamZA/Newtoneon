@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject basicEnemy;
-    public float spawnDelay;
-    public float spawnRate;
+    [SerializeField] private GameObject basicEnemy;
+    [SerializeField] private float spawnDelay;
+    [SerializeField] private float spawnRate;
     private int enemiesSpawned;
     public bool playerAlive;
     private GameObject[] _spawners;

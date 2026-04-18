@@ -8,17 +8,17 @@ public class MainMenuEvents : MonoBehaviour
 {
     private int _highScore;
 
-    public GameObject mainMenuText;
-    public GameObject playerButton;
-    public Button soundButton;
-    public Button musicButton;
+    [SerializeField] private GameObject mainMenuText;
+    [SerializeField] private GameObject playerButton;
+    [SerializeField] private Button soundButton;
+    [SerializeField] private Button musicButton;
 
-    public Sprite musicUnmutedIcon;
-    public Sprite musicMutedIcon;
-    public Sprite soundMutedIcon;
-    public Sprite soundUnmutedIcon;
+    [SerializeField] private Sprite musicUnmutedIcon;
+    [SerializeField] private Sprite musicMutedIcon;
+    [SerializeField] private Sprite soundMutedIcon;
+    [SerializeField] private Sprite soundUnmutedIcon;
 
-    public AudioSource Music;
+    [SerializeField] private AudioSource Music;
 
     public void Start()
     {

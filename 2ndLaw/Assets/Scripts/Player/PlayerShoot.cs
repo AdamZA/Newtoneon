@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour {
 
-    //variables/refs
-
-    public Transform shotPrefab;
+    [SerializeField] private Transform shotPrefab;
+    [SerializeField] private Transform orbObject;
+    [SerializeField] private AudioClip shotSound;
     public Transform playerObject;
-    public Transform orbObject;
-    public AudioClip shotSound;
     private float shotSpeed;
     private float _playerSpeed;
     private float _remainingCooldown;
@@ -94,10 +92,8 @@ public class PlayerShoot : MonoBehaviour {
         _gunSafety = false;
     }
 
-    //Method for resultant movement
     void Recoil()
     {
-        //Calculate the angle
         var orbPos = orbObject.position;
         var playerPos = playerObject.position;
         Vector3 targetDir = playerPos - orbPos;

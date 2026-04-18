@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EnemyDeath : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem deathAnimation;
+    [SerializeField] private AudioClip deathSound;
     private GameObject _scoreManager;
-    public ParticleSystem deathAnimation;
     private GameStateManager _gameStateManager;
-    public AudioClip deathSound;
 
     public void Start()
     {

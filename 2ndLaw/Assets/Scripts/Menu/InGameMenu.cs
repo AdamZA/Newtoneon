@@ -9,26 +9,26 @@ public class InGameMenu : MonoBehaviour {
     private GameObject _player;
     public bool playerDead;
    
-    public Button pauseButton;
-    public Button backButton;
-    public Button soundButton;
-    public Button musicButton;
-    public Button restartButton;
+    [SerializeField] private Button pauseButton;
+    [SerializeField] private Button backButton;
+    [SerializeField] private Button soundButton;
+    [SerializeField] private Button musicButton;
+    [SerializeField] private Button restartButton;
 
-    public GameObject pauseOverlay;
-    public GameObject pausedText;
-    public GameObject gameOverText;
+    [SerializeField] private GameObject pauseOverlay;
+    [SerializeField] private GameObject pausedText;
+    [SerializeField] private GameObject gameOverText;
 
-    public Sprite playIcon;
-    public Sprite pauseIcon;
-    public Sprite musicUnmutedIcon;
-    public Sprite musicMutedIcon;
-    public Sprite soundMutedIcon;
-    public Sprite soundUnmutedIcon;
+    [SerializeField] private Sprite playIcon;
+    [SerializeField] private Sprite pauseIcon;
+    [SerializeField] private Sprite musicUnmutedIcon;
+    [SerializeField] private Sprite musicMutedIcon;
+    [SerializeField] private Sprite soundMutedIcon;
+    [SerializeField] private Sprite soundUnmutedIcon;
+
+    [SerializeField] private GameStateManager gameStateManager;
 
     private AudioSource _music;
-
-    public GameStateManager gameStateManager;
 
     public void Start()
     {

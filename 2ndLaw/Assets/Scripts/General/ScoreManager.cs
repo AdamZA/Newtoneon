@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    public GameObject scoreText;
+    [SerializeField] private GameObject scoreText;
     private int _score;
     private int _highScore;
     private bool _gameOver;

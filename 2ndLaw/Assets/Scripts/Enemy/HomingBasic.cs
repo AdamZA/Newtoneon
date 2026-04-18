@@ -6,7 +6,7 @@ public class HomingBasic : MonoBehaviour
 {
 
     private Transform _playerTransform;
-    public float speed;
+    [SerializeField] private float speed;
 
     private Rigidbody2D _rb;
 
