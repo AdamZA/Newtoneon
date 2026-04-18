@@ -29,7 +29,8 @@ public class PlayerShoot : MonoBehaviour {
         _remainingCooldown = _baseCoolDown;
         _onCooldown = false;
         _touchableScreen = new Rect(0, 0, Screen.width, Screen.height - 200);
-        _manager = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<GameStateManager>();
+        GameObject gsm = GameObject.FindGameObjectWithTag("GameStateManager");
+        if (gsm != null) _manager = gsm.GetComponent<GameStateManager>();
         Invoke("RemoveSafety", 0.5f);
     }
 
@@ -76,7 +77,7 @@ public class PlayerShoot : MonoBehaviour {
             Vector3 targetDir = playerPos - orbPos;
             var shot = Instantiate(shotPrefab, orbPos, Quaternion.identity);
             //TODO: Fix sound management
-            if(_manager.soundMuted == 0)
+            if(_manager != null && _manager.soundMuted == 0)
             {
                 AudioSource.PlayClipAtPoint(shotSound, gameObject.transform.position);
             }

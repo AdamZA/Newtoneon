@@ -10,7 +10,8 @@ public class PlayerLife : MonoBehaviour
 
     public void Start()
     {
-        _gameStateManager = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<GameStateManager>();
+        GameObject obj = GameObject.FindGameObjectWithTag("GameStateManager");
+        if (obj != null) _gameStateManager = obj.GetComponent<GameStateManager>();
     }
 
     void OnTriggerEnter2D(Collider2D collisionInfo)
@@ -22,7 +23,7 @@ public class PlayerLife : MonoBehaviour
                 _gameStateManager.GameOver();
             }
 
-            if (_gameStateManager.soundMuted == 0)
+            if (_gameStateManager != null && _gameStateManager.soundMuted == 0)
             {
                 AudioSource.PlayClipAtPoint(deathSound, gameObject.transform.position);
             }

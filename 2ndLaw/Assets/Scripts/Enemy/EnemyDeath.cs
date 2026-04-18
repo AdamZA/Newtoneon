@@ -12,14 +12,15 @@ public class EnemyDeath : MonoBehaviour
     public void Start()
     {
         _scoreManager = GameObject.FindGameObjectWithTag("ScoreManager");
-        _gameStateManager = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<GameStateManager>();
+        GameObject gsm = GameObject.FindGameObjectWithTag("GameStateManager");
+        if (gsm != null) _gameStateManager = gsm.GetComponent<GameStateManager>();
     }
 
     void OnTriggerEnter2D(Collider2D collisionInfo)
     {
         if (collisionInfo.gameObject.CompareTag("PlayerShot"))
         {
-            if (_gameStateManager.soundMuted == 0)
+            if (_gameStateManager != null && _gameStateManager.soundMuted == 0)
             {
                 AudioSource.PlayClipAtPoint(deathSound, gameObject.transform.position);
             }

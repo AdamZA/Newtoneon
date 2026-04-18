@@ -30,9 +30,8 @@ public class ScoreManager : MonoBehaviour
                 GameStateManager manager = _gameStateManager.GetComponent<GameStateManager>();
                 if (manager != null && manager.enemyStartSpeed < 3.0f)
                 {
-                    _gameStateManager.GetComponent<GameStateManager>().enemyStartSpeed += 0.25f;
+                    manager.enemyStartSpeed += 0.25f;
                 }
-
             }
         }
     }

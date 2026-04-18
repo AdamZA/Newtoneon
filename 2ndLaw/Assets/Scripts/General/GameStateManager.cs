@@ -38,9 +38,9 @@ public class GameStateManager : MonoBehaviour
 	
     public void GameOver()
     {
-        _inGameMenu.GameOver();
-        _enemySpawner.playerAlive = false;
-        _scoreManager.GameOver();
+        if (_inGameMenu != null) _inGameMenu.GameOver();
+        if (_enemySpawner != null) _enemySpawner.playerAlive = false;
+        if (_scoreManager != null) _scoreManager.GameOver();
     }
 	
 }

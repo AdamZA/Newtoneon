@@ -37,14 +37,13 @@ public class EnemySpawner : MonoBehaviour
                 
                 for(int i = 0; i < _enemiesToSpawn; i++)
                 {
-                    int spawnerToUse = Mathf.RoundToInt(Random.Range(0, _spawners.Length));
-                    float spawnerMaxX = _spawners[spawnerToUse].GetComponent<BoxCollider>().bounds.max.x;
-                    float spawnerMinX = _spawners[spawnerToUse].GetComponent<BoxCollider>().bounds.min.x;
-                    float spawnX = Random.Range(Mathf.Min(spawnerMaxX, spawnerMinX), Mathf.Max(spawnerMaxX, spawnerMinX));
+                    int spawnerToUse = Random.Range(0, _spawners.Length);
+                    BoxCollider spawnerCollider = _spawners[spawnerToUse].GetComponent<BoxCollider>();
+                    if (spawnerCollider == null) continue;
 
-                    float spawnerMaxY = _spawners[spawnerToUse].GetComponent<BoxCollider>().bounds.max.y;
-                    float spawnerMinY = _spawners[spawnerToUse].GetComponent<BoxCollider>().bounds.min.y;
-                    float spawnY = Random.Range(Mathf.Min(spawnerMaxY, spawnerMinY), Mathf.Max(spawnerMaxY, spawnerMinY));
+                    Bounds bounds = spawnerCollider.bounds;
+                    float spawnX = Random.Range(bounds.min.x, bounds.max.x);
+                    float spawnY = Random.Range(bounds.min.y, bounds.max.y);
 
                     Instantiate(basicEnemy, new Vector3(spawnX, spawnY, 1.0f), Quaternion.identity);
                     enemiesSpawned++;

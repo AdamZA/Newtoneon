@@ -38,7 +38,8 @@ public class InGameMenu : MonoBehaviour {
         _player = GameObject.FindGameObjectWithTag("Player");
         _musicMuted = PlayerPrefs.GetInt("music", 0);
         _soundMuted = PlayerPrefs.GetInt("sounds", 0);
-        _music = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>();
+        GameObject musicObj = GameObject.FindGameObjectWithTag("Music");
+        if (musicObj != null) _music = musicObj.GetComponent<AudioSource>();
 
         if (_musicMuted == 0)
         {
