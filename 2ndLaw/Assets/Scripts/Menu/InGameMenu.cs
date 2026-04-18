@@ -7,8 +7,6 @@ public class InGameMenu : MonoBehaviour {
 
     private bool _paused;
     private GameObject _player;
-    private int _musicMuted;
-    private int _soundMuted;
     public bool playerDead;
    
     public Button pauseButton;
@@ -36,30 +34,12 @@ public class InGameMenu : MonoBehaviour {
     {
         _paused = false;
         _player = GameObject.FindGameObjectWithTag("Player");
-        _musicMuted = PlayerPrefs.GetInt("music", 0);
-        _soundMuted = PlayerPrefs.GetInt("sounds", 0);
         GameObject musicObj = GameObject.FindGameObjectWithTag("Music");
         if (musicObj != null) _music = musicObj.GetComponent<AudioSource>();
 
-        if (_musicMuted == 0)
-        {
-            musicButton.image.sprite = musicUnmutedIcon;
-            _music.mute = false;
-        }
-        else
-        {
-            musicButton.image.sprite = musicMutedIcon;
-            _music.mute = true;
-        }
-
-        if (_soundMuted == 0)
-        {
-            soundButton.image.sprite = soundUnmutedIcon;
-        }
-        else
-        {
-            soundButton.image.sprite = soundMutedIcon;
-        }
+        if (_music != null) _music.mute = AudioSettings.MusicMuted;
+        musicButton.image.sprite = AudioSettings.MusicMuted ? musicMutedIcon : musicUnmutedIcon;
+        soundButton.image.sprite = AudioSettings.SoundMuted ? soundMutedIcon : soundUnmutedIcon;
     }
 
     public void RestartGame()
@@ -106,42 +86,15 @@ public class InGameMenu : MonoBehaviour {
 
     public void MuteMusicPressed()
     {
-        if(_musicMuted == 0)
-        {
-            _musicMuted = 1;
-            PlayerPrefs.SetInt("music", 1);
-            gameStateManager.musicMuted = 1;
-            musicButton.image.sprite = musicMutedIcon;
-            _music.mute = true;
-        }
-        else
-        {
-            _musicMuted = 0;
-            PlayerPrefs.SetInt("music", 0);
-            gameStateManager.musicMuted = 0;
-            musicButton.image.sprite = musicUnmutedIcon;
-            _music.mute = false;
-        }
+        AudioSettings.SetMusicMuted(!AudioSettings.MusicMuted);
+        if (_music != null) _music.mute = AudioSettings.MusicMuted;
+        musicButton.image.sprite = AudioSettings.MusicMuted ? musicMutedIcon : musicUnmutedIcon;
     }
 
     public void MuteSoundPressed()
     {
-        if(_soundMuted == 0)
-        {
-            _soundMuted = 1;
-            PlayerPrefs.SetInt("sounds", 1);
-            gameStateManager.soundMuted = 1;
-            soundButton.image.sprite = soundMutedIcon;
-           
-        }
-        else
-        {
-            _soundMuted = 0;
-            PlayerPrefs.SetInt("sounds", 0);
-            gameStateManager.soundMuted = 0;
-            soundButton.image.sprite = soundUnmutedIcon;
-            
-        }
+        AudioSettings.SetSoundMuted(!AudioSettings.SoundMuted);
+        soundButton.image.sprite = AudioSettings.SoundMuted ? soundMutedIcon : soundUnmutedIcon;
     }
 
     public void ShowButtons(bool toggle)

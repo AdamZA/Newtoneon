@@ -8,13 +8,12 @@ public class GameStateManager : MonoBehaviour
     private InGameMenu _inGameMenu;
     private EnemySpawner _enemySpawner;
     private ScoreManager _scoreManager;
-    public int soundMuted;
-    public int musicMuted;
 
-    void Start ()
+    public int soundMuted => AudioSettings.SoundMuted ? 1 : 0;
+    public int musicMuted => AudioSettings.MusicMuted ? 1 : 0;
+
+    void Start()
     {
-        soundMuted = PlayerPrefs.GetInt("sounds", 0);
-        musicMuted = PlayerPrefs.GetInt("music", 0);
         Application.targetFrameRate = 60;
 
         GameObject _eventManager = GameObject.FindGameObjectWithTag("EventSystem");

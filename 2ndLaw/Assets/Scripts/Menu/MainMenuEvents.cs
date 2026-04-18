@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class MainMenuEvents : MonoBehaviour
 {
-    private int _musicMuted;
-    private int _soundMuted;
     private int _highScore;
 
     public GameObject mainMenuText;
@@ -30,28 +28,9 @@ public class MainMenuEvents : MonoBehaviour
             Destroy(ingameMusic);
         }
 
-        _musicMuted = PlayerPrefs.GetInt("music", 0);
-        _soundMuted = PlayerPrefs.GetInt("sounds", 0);
-
-        if (_musicMuted == 0)
-        {
-            musicButton.image.sprite = musicUnmutedIcon;
-            Music.mute = false;
-        }
-        else
-        {
-            musicButton.image.sprite = musicMutedIcon;
-            Music.mute = true; 
-        }
-
-        if (_soundMuted == 0)
-        {
-            soundButton.image.sprite = soundUnmutedIcon;
-        }
-        else
-        {
-            soundButton.image.sprite = soundMutedIcon;
-        }
+        Music.mute = AudioSettings.MusicMuted;
+        musicButton.image.sprite = AudioSettings.MusicMuted ? musicMutedIcon : musicUnmutedIcon;
+        soundButton.image.sprite = AudioSettings.SoundMuted ? soundMutedIcon : soundUnmutedIcon;
 
         _highScore = PlayerPrefs.GetInt("HighScore", 0);
         mainMenuText.GetComponent<UnityEngine.UI.Text>().text = "Highscore: " + _highScore;
@@ -72,36 +51,15 @@ public class MainMenuEvents : MonoBehaviour
 
     public void MuteMusicPressed()
     {
-        if (_musicMuted == 0)
-        {
-            PlayerPrefs.SetInt("music", 1);
-            _musicMuted = 1;
-            Music.mute = true;
-            musicButton.image.sprite = musicMutedIcon;
-        }
-        else
-        {
-            Music.mute = false;
-            _musicMuted = 0;
-            PlayerPrefs.SetInt("music", 0);
-            musicButton.image.sprite = musicUnmutedIcon;
-        }
+        AudioSettings.SetMusicMuted(!AudioSettings.MusicMuted);
+        Music.mute = AudioSettings.MusicMuted;
+        musicButton.image.sprite = AudioSettings.MusicMuted ? musicMutedIcon : musicUnmutedIcon;
     }
 
     public void MuteSoundPressed()
     {
-        if (_soundMuted == 0)
-        {
-            _soundMuted = 1;
-            PlayerPrefs.SetInt("sounds", 1);
-            soundButton.image.sprite = soundMutedIcon;
-        }
-        else
-        {
-            _soundMuted = 0;
-            PlayerPrefs.SetInt("sounds", 0);
-            soundButton.image.sprite = soundUnmutedIcon;
-        }
+        AudioSettings.SetSoundMuted(!AudioSettings.SoundMuted);
+        soundButton.image.sprite = AudioSettings.SoundMuted ? soundMutedIcon : soundUnmutedIcon;
     }
 
     public void ClearScoreButtonPressed()
